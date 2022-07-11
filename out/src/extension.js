@@ -33,9 +33,11 @@ function activate(context) {
     vscode.commands.registerCommand('treeLocalHistory.compareEntry', treeProvider.compare, treeProvider);
     vscode.commands.registerCommand('treeLocalHistory.restoreEntry', treeProvider.restore, treeProvider);
     vscode.commands.registerCommand('treeLocalHistory.enableSaving', () => {
+        vscode.window.setStatusBarMessage('Auto Saving enabled!', 3000);
         saving_enabled = true;
     });
     vscode.commands.registerCommand('treeLocalHistory.disableSaving', () => {
+        vscode.window.setStatusBarMessage('Auto Saving disabled!', 3000);
         saving_enabled = false;
     });
     // Create first history before save document
@@ -63,7 +65,7 @@ function activate(context) {
                 }
             });
         }
-    }, 5000);
+    }, 15000);
     vscode.window.onDidChangeActiveTextEditor(e => treeProvider.changeActiveFile());
     vscode.workspace.onDidChangeConfiguration(configChangedEvent => {
         if (configChangedEvent.affectsConfiguration('local-history.treeLocation'))
