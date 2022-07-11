@@ -1,7 +1,7 @@
 {
     "name": "local-history-auto-save",
     "displayName": "Local History Auto Save",
-    "description": "Auto save files into local history every 5s",
+    "description": "Auto save files into local history every 15s",
     "publisher": "WRG",
     "version": "1.0.0",
     "engines": {
