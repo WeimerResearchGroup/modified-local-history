@@ -87,7 +87,9 @@ export class HistoryController {
         return new Promise((resolve, reject) => {
 
             if (!settings.enabled)
-                resolve();
+                return new Promise<void>((resolve, reject) => {
+                    resolve();
+                });
 
             let fileProperties = this.decodeFile(fileName, settings, true);
             this.getHistoryFiles(fileProperties && fileProperties.file, settings, noLimit)
@@ -103,7 +105,9 @@ export class HistoryController {
         return new Promise((resolve, reject) => {
 
             if (!settings.enabled)
-                resolve();
+                return new Promise<void>((resolve, reject) => {
+                    resolve();
+                });
 
             if (findFile)
                 this.findAllHistory(find, settings, noLimit)
@@ -146,7 +150,9 @@ export class HistoryController {
             rimraf(fileHistoryPath, err => {
                 if (err)
                     return reject(err);
-                return resolve();
+                    return new Promise<void>((resolve, reject) => {
+                        resolve();
+                      });
             });
         });
     }
@@ -174,7 +180,9 @@ export class HistoryController {
                 fs.copyFile(src, fileProperties.file, err => {
                     if (err)
                         return reject(err);
-                    return resolve();
+                        return new Promise<void>((resolve, reject) => {
+                            resolve();
+                          });
                 });
             });
         }
@@ -228,7 +236,9 @@ export class HistoryController {
                 // (Often the case...)
                 const files = glob.sync(revisionPattern, {cwd: settings.historyPath.replace(/\\/g, '/')});
                 if (files && files.length > 0)
-                    return resolve();
+                return new Promise<void>((resolve, reject) => {
+                    resolve();
+                  });
 
                 if (timeout && timeout.isTimedOut()) {
                     vscode.window.showErrorMessage(`Timeout when internalSave: ' ${document.fileName}`);
@@ -376,7 +386,9 @@ export class HistoryController {
                 vscode.workspace.openTextDocument(filePath)
                     .then(d=> {
                         vscode.window.showTextDocument(d, column)
-                            .then(()=>resolve(), (err)=>reject(err));
+                            .then(()=>{return new Promise<void>((resolve, reject) => {
+                                resolve();
+                              });}, (err)=>reject(err));
                     }, (err)=>reject(err));
             });
     }
