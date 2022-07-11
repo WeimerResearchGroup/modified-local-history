@@ -8,6 +8,7 @@ const historyTree_provider_1 = require("./historyTree.provider");
 * Activate the extension.
 */
 function activate(context) {
+    var saving_enabled = false;
     const controller = new history_controller_1.HistoryController();
     context.subscriptions.push(vscode.commands.registerTextEditorCommand('local-history.showAll', controller.showAll, controller));
     context.subscriptions.push(vscode.commands.registerTextEditorCommand('local-history.showCurrent', controller.showCurrent, controller));
@@ -31,27 +32,37 @@ function activate(context) {
     vscode.commands.registerCommand('treeLocalHistory.selectEntry', treeProvider.select, treeProvider);
     vscode.commands.registerCommand('treeLocalHistory.compareEntry', treeProvider.compare, treeProvider);
     vscode.commands.registerCommand('treeLocalHistory.restoreEntry', treeProvider.restore, treeProvider);
+    vscode.commands.registerCommand('treeLocalHistory.enableSaving', () => {
+        saving_enabled = true;
+    });
+    vscode.commands.registerCommand('treeLocalHistory.disableSaving', () => {
+        saving_enabled = false;
+    });
     // Create first history before save document
     vscode.workspace.onWillSaveTextDocument(e => e.waitUntil(controller.saveFirstRevision(e.document)));
     // Create history on save document
     vscode.workspace.onDidSaveTextDocument(document => {
-        controller.saveRevision(document)
-            .then((saveDocument) => {
-            // refresh viewer (if any)
-            if (saveDocument) {
-                treeProvider.refresh();
-            }
-        });
+        if (saving_enabled) {
+            controller.saveRevision(document)
+                .then((saveDocument) => {
+                // refresh viewer (if any)
+                if (saveDocument) {
+                    treeProvider.refresh();
+                }
+            });
+        }
     });
     setInterval(() => {
-        vscode.workspace.saveAll();
-        controller.saveRevision(vscode.window.activeTextEditor.document)
-            .then((saveDocument) => {
-            // refresh viewer (if any)
-            if (saveDocument) {
-                treeProvider.refresh();
-            }
-        });
+        if (saving_enabled) {
+            vscode.workspace.saveAll();
+            controller.saveRevision(vscode.window.activeTextEditor.document)
+                .then((saveDocument) => {
+                // refresh viewer (if any)
+                if (saveDocument) {
+                    treeProvider.refresh();
+                }
+            });
+        }
     }, 5000);
     vscode.window.onDidChangeActiveTextEditor(e => treeProvider.changeActiveFile());
     vscode.workspace.onDidChangeConfiguration(configChangedEvent => {

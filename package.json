@@ -11,7 +11,7 @@
     "homepage": "https://github.com/zabel-xyz/local-history",
     "repository": {
         "type": "git",
-        "url": "https://github.com/zabel-xyz/local-history.git"
+        "url": "https://github.com/WeimerResearchGroup/integrated-extension.git"
     },
     "bugs": {
         "url": "https://github.com/zabel-xyz/local-history/issues"
@@ -56,6 +56,18 @@
             ]
         },
         "commands": [
+            {
+                "command": "treeLocalHistory.enableSaving",
+                "title": "Enable Saving Files",
+                "when": false,
+                "icon": "$(refresh)"
+            },
+            {
+                "command": "treeLocalHistory.disableSaving",
+                "title": "Disable Saving Files",
+                "when": false,
+                "icon": "$(refresh)"
+            },
             {
                 "command": "treeLocalHistory.refresh",
                 "title": "Refresh",
