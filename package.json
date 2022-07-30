@@ -1,9 +1,9 @@
 {
-    "name": "local-history-auto-save-debug",
-    "displayName": "Local History Auto Save Debug",
+    "name": "local-history-auto-save",
+    "displayName": "Local History Auto Save",
     "description": "Auto save files into local history every 15s",
     "publisher": "WRG",
-    "version": "2.0.4",
+    "version": "2.0.0",
     "engines": {
         "vscode": "^1.42.0"
     },
