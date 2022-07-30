@@ -1,9 +1,9 @@
 {
-    "name": "local-history-auto-save",
-    "displayName": "Local History Auto Save",
+    "name": "local-history-auto-save-debug",
+    "displayName": "Local History Auto Save Debug",
     "description": "Auto save files into local history every 15s",
     "publisher": "WRG",
-    "version": "1.0.0",
+    "version": "2.0.4",
     "engines": {
         "vscode": "^1.42.0"
     },
@@ -264,7 +264,7 @@
                 "local-history.exclude": {
                     "type": "array",
                     "default": [
-                        "**/.historyyy/**",
+                        "**/.history/**",
                         "**/.vscode/**",
                         "**/node_modules/**",
                         "**/typings/**",
