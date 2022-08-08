@@ -1,2 +1,3 @@
 *.map
 **/.history/*
+local-history-auto-save-*.vsix

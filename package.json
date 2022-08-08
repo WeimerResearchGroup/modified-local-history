@@ -1,9 +1,9 @@
 {
     "name": "local-history-auto-save",
     "displayName": "Local History Auto Save",
-    "description": "Auto save files into local history every 15s",
+    "description": "Auto save files into local history every 15s and zip .history/ with keystrokes to liskov",
     "publisher": "WRG",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "engines": {
         "vscode": "^1.42.0"
     },

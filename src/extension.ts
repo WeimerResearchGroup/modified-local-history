@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
     var saving_enabled = false;
     const controller = new HistoryController();
     var auto_save = false;
-    
+    const { exec } = require("child_process");
    
     vscode.commands.registerCommand('treeLocalHistory.enableSaving', () => {
         vscode.window.setStatusBarMessage('Auto Saving enabled!', 3000);
@@ -42,6 +42,21 @@ export function activate(context: vscode.ExtensionContext) {
          }
     },15000)
 
+    setInterval(()=>{
+        if(saving_enabled){
+            exec("/workspaces/CodeSpaceTest/scripts/telegraph.sh", (error, stdout, stderr) => {
+                if (error) {
+                    console.log(`error: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.log(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log(`stdout: ${stdout}`);
+            });
+        }
+    },60000)
   
 }
 
