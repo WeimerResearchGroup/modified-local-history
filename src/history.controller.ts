@@ -63,7 +63,6 @@ export class HistoryController {
         }
 
         if (!isOriginal && settings.saveDelay) {
-            console.log("65\n");
             if (!this.saveBatch.get(document.fileName)) {
                 this.saveBatch.set(document.fileName, document);
                 return this.timeoutPromise(this.internalSaveDocument, settings.saveDelay * 1000, [document, settings]);

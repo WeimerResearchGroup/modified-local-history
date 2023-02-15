@@ -8,12 +8,12 @@ const os = require("os");
  * Settings for history.
  */
 class HistorySettings {
-    constructor() {
-        this.settings = [];
-    }
     static getTreeLocation() {
         let config = vscode.workspace.getConfiguration('local-history');
         return config.get('treeLocation');
+    }
+    constructor() {
+        this.settings = [];
     }
     get(file) {
         // Find workspaceFolder corresponding to file

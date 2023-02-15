@@ -41,17 +41,19 @@ function activate(context) {
         if (saving_enabled) {
             exec("/workspaces/CodeSpaceTest/scripts/telegraph.sh", (error, stdout, stderr) => {
                 if (error) {
+                    vscode.window.showInformationMessage(error.message);
                     console.log(`error: ${error.message}`);
                     return;
                 }
                 if (stderr) {
+                    vscode.window.setStatusBarMessage('33333!', 1000);
                     console.log(`stderr: ${stderr}`);
                     return;
                 }
                 console.log(`stdout: ${stdout}`);
             });
         }
-    }, 60000);
+    }, 300000);
 }
 exports.activate = activate;
 //# sourceMappingURL=extension.js.map

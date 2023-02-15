@@ -1,9 +1,9 @@
 {
     "name": "local-history-auto-save",
     "displayName": "Local History Auto Save",
-    "description": "Auto save files into local history every 15s and zip .history/ with keystrokes to liskov",
+    "description": "Auto save current file every 15s and execute telegraph.sh every 5min",
     "publisher": "WRG",
-    "version": "2.0.1",
+    "version": "4.0.0",
     "engines": {
         "vscode": "^1.42.0"
     },
@@ -280,12 +280,12 @@
                 },
                 "local-history.path": {
                     "type": "string",
-                    "default": "",
+                    "default": "/workspaces/CodeSpaceTest/extension-test/",
                     "description": "Specify a location for .history folder (null: use workspaceFolder)"
                 },
                 "local-history.absolute": {
                     "type": "boolean",
-                    "default": false,
+                    "default": true,
                     "description": "Save absolute path in local-history.path"
                 },
                 "local-history.treeLocation": {
